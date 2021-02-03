@@ -1,1 +1,1 @@
-# gem5 and McPAT Simulators Labs for Computer Architecture Exploration and Understanding
+### gem5 and McPAT Simulators Labs for Computer Architecture Exploration and Understanding
