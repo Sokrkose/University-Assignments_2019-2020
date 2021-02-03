@@ -1,1 +1,1 @@
-### Simulink Position & Speed Control Simulation of Squirel Cage Induction Motor & PMSM
+### Simulink Position & Speed Control Simulation of Squirrel Cage Induction Motor & PMSM
