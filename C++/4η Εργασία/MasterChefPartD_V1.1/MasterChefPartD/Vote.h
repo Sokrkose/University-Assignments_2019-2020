@@ -1,0 +1,6 @@
+#ifndef VOTE_H_INCLUDED
+#define VOTE_H_INCLUDED
+
+// YOU HAVE TO FILL THIS CLASS.
+
+#endif // VOTE_H_INCLUDED
