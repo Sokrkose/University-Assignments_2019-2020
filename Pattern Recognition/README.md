@@ -1,0 +1,1 @@
+#### Continuous Implicit Authentication combined kNN-SVM confidence-based model for smartphone applications. The results of this research show that the kNN-SVM model presented here can detect a non-authorized user in about 2.44 swipes.
