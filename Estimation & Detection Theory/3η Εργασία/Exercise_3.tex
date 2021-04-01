@@ -1,0 +1,180 @@
+%% LyX 2.3.6.1 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[LGR,T1]{fontenc}
+\usepackage[latin9]{inputenc}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\DeclareRobustCommand{\greektext}{%
+  \fontencoding{LGR}\selectfont\def\encodingdefault{LGR}}
+\DeclareRobustCommand{\textgreek}[1]{\leavevmode{\greektext #1}}
+\ProvideTextCommand{\~}{LGR}[1]{\char126#1}
+
+
+\makeatother
+
+\usepackage{babel}
+\begin{document}
+\textbf{Ex. 3}
+\begin{description}
+\item [{3.1}]~
+\end{description}
+\begin{itemize}
+\item \textgreek{H} \textgreek{svun\char136rthsvh} \textgreek{pukn\char236thtac}
+\textgreek{pijan\char236thtac} \textgreek{thc} \textgreek{katanom\char160c}
+Poisson \textgreek{e\char208nai} 
+\[
+g(x)=\frac{\lambda^{\chi}e^{-\lambda}}{x!},x=0,1,2,...
+\]
+\end{itemize}
+\textgreek{Ap\char236} \textgreek{ton} \textgreek{orisvm\char236}
+\textgreek{\char232qoume}, 
+
+\[
+E[X]=\sum_{x=0}^{\infty}xg(x)=>
+\]
+
+\[
+E[X]=\sum_{x=0}^{\infty}x\frac{\lambda^{x}e^{-\lambda}}{x!}=\lambda e^{-\lambda}\sum_{x=0}^{\infty}x\frac{\lambda^{x-1}}{x!}=\lambda e^{-\lambda}\sum_{x=1}^{\infty}\frac{\lambda^{x-1}}{(x-1)!}=>
+\]
+\textgreek{j\char232tw} $y=x-1$,
+
+\[
+E[X]=\lambda e^{-\lambda}\sum_{y=0}^{\infty}\frac{\lambda^{y}}{y!}=\lambda e^{-\lambda}e^{\lambda}=\lambda
+\]
+
+\[
+E[X]=\mu=\lambda
+\]
+
+\begin{itemize}
+\item \textgreek{Gia} \textgreek{thn} \textgreek{metablht\char236thta} \textgreek{\char232qoume}
+\textgreek{ex}' \textgreek{orisvmo\char212},
+\[
+Var[x]=\sigma^{2}=E[X^{2}]-E[X]^{2}
+\]
+\end{itemize}
+\textgreek{Gnwr\char208zoume} \textgreek{\char236ti}, 
+\[
+E[X]=\lambda
+\]
+\textgreek{'Ara} \textgreek{pr\char232pei} \textgreek{na} \textgreek{bro\char212me}
+\textgreek{to} $E[X^{2}]$,
+\[
+E[X^{2}]=\sum_{x=0}^{\infty}x^{2}g(x)=>
+\]
+
+\[
+E[X^{2}]=\sum_{x=0}^{\infty}x^{2}\frac{\lambda^{\chi}e^{-\lambda}}{x!}=\lambda e^{-\lambda}\sum_{x=0}^{\infty}x^{2}\frac{\lambda^{x-1}}{x!}=\lambda e^{-\lambda}\sum_{x=1}^{\infty}x\frac{\lambda^{x-1}}{(x-1)!}=
+\]
+\[
+=\lambda e^{-\lambda}(\sum_{x=1}^{\infty}(x-1)\frac{\lambda^{x-1}}{(x-1)!}+\sum_{x=1}^{\infty}\frac{\lambda^{x-1}}{(x-1)!})=\lambda e^{-\lambda}(\sum_{x=2}^{\infty}\frac{\lambda^{x-2}}{(x-2)!}+\sum_{x=1}^{\infty}\frac{\lambda^{x-1}}{(x-1)!})
+\]
+\textgreek{j\char232tw} $i=x-2$ \textgreek{kai} $j=x-1$,
+\[
+E[X^{2}]=\lambda e^{-\lambda}(\sum_{i=0}^{\infty}\frac{\lambda^{i}}{i!}+\sum_{j=1}^{\infty}\frac{\lambda^{j}}{j!})=\lambda e^{-\lambda}(\lambda e^{\lambda}+e^{\lambda})=\lambda(\lambda+1)=\lambda^{2}+\lambda
+\]
+\textgreek{'Ara},
+\[
+E[X^{2}]=\lambda^{2}+\lambda
+\]
+\textgreek{Sunep\char184c}, 
+\[
+Var(X)=\sigma^{2}=E[X^{2}]-E[X]^{2}=\lambda^{2}+\lambda-\lambda^{2}=\lambda=>
+\]
+
+\[
+Var(X)=\sigma^{2}=\lambda
+\]
+
+\begin{description}
+\item [{3.2}]~
+\end{description}
+\begin{itemize}
+\item \textgreek{Genik\char136} \textgreek{\char232qoume},
+\[
+M_{n}=\frac{1}{n}\sum_{i=1}^{\infty}x_{i}
+\]
+\end{itemize}
+\textgreek{Sunep\char184c},
+\[
+Var(M_{n})=Var(\frac{1}{n}\sum_{i=1}^{\infty}x_{i})=(\frac{1}{n})^{2}Var[\sum_{i=1}^{\infty}x_{i}]=\frac{1}{n^{2}}Var[x_{1}+x_{2}+...+x_{n}]=
+\]
+
+\[
+=\frac{1}{n^{2}}(\sigma^{2}+\sigma^{2}+...+\sigma^{2})=\frac{1}{n^{2}}n\sigma^{2}=\frac{\sigma^{2}}{n}=\frac{\lambda}{n}
+\]
+
+\begin{itemize}
+\item \textgreek{Apode\char208xame} \textgreek{\char236ti} $Var(S_{n}^{2})=\frac{1}{n}(\sigma_{4}-\frac{n-3}{n-1}\sigma^{4})=\frac{1}{n}(E[(X-\mu)^{4}]-\frac{n-3}{n-1}\lambda^{2})$
+\end{itemize}
+\textgreek{Ep\char208svhc} \textgreek{apode\char208xame} \textgreek{\char236ti}
+$E[X^{2}]=\lambda^{2}+\lambda$ \textgreek{kai} \textgreek{isvq\char212ei}
+\textgreek{\char236ti} $E[X^{3}]=\lambda+3\lambda^{2}+\lambda^{3}$\textgreek{kai}
+$E[X^{3}]=\lambda+7\lambda^{2}+6\lambda^{3}+\lambda^{4}$ \textgreek{gia}
+Poisson \textgreek{Katanomh}, \textgreek{Ara},
+
+\[
+E[(X-\mu)^{4}]=E[(X-\lambda)^{4}]=E[X^{4}]-4\mu E[X^{3}]+6\mu E[X^{2}]-3\mu^{4}=
+\]
+
+\[
+=(\lambda+7\lambda^{2}+6\lambda^{3}+\lambda^{4})-4\lambda(\lambda+3\lambda^{2}+\lambda^{3})+6\lambda(\lambda^{2}+\lambda)-3\lambda^{4}=
+\]
+
+\[
+\lambda+7\lambda^{2}+6\lambda^{3}+\lambda^{4}-4\lambda^{2}-12\lambda^{3}-4\lambda^{4}+6\lambda^{4}+6\lambda^{3}-3\lambda^{4}=3\lambda^{2}+\lambda
+\]
+\textgreek{Sunep\char184c},
+
+\[
+E[(X-\mu)^{4}]=3\lambda^{2}+\lambda
+\]
+\textgreek{Ara},
+\[
+Var(S_{n}^{2})=\frac{1}{n}(3\lambda^{2}+\lambda-\frac{n-3}{n-1}\lambda^{2})=\frac{1}{n}(\lambda+\frac{2n}{n-1}\lambda^{2})=\frac{\lambda}{n}(1+\frac{2n}{n-1}\lambda)=>
+\]
+
+\[
+Var(S_{n}^{2})=\frac{\lambda}{n}(1+\frac{2n}{n-1}\lambda)
+\]
+
+\begin{description}
+\item [{3.3}]~
+\end{description}
+\textgreek{H}$M_{n}$\textgreek{e\char208nai} \textgreek{pio} \textgreek{apodotik\char236c}
+\textgreek{ektimht\char160c} \textgreek{ap\char236} \textgreek{thn}$S_{n}^{2}$\textgreek{e\char136n}
+\textgreek{isvq\char212ei} \textgreek{\char236ti} $Var(W_{n})<Var(S_{n}^{2})$.
+\textgreek{'Eqoume},
+\[
+Var(S_{n}^{2})-Var(W_{n})=\frac{\lambda}{n}(1+\frac{2n}{n-1}\lambda)-\frac{\lambda}{n}=\frac{\lambda}{n}(1+\frac{2n}{n-1}\lambda)=>
+\]
+
+\[
+Var(S_{n}^{2})-Var(W_{n})=\frac{\lambda}{n}(1+\frac{2n}{n-1}\lambda-1)=\frac{2\lambda^{2}}{n-1}>0
+\]
+\textgreek{Sunep\char184c}, \textgreek{isvq\char212ei} \textgreek{h}
+\textgreek{anisv\char236thta} \textgreek{kai} \textgreek{h} $M_{n}$\textgreek{e\char208nai}
+\textgreek{pio} \textgreek{apodotik\char236c} \textgreek{ektimht\char160c}
+\textgreek{ap\char236} \textgreek{thn}$S_{n}^{2}$.
+\begin{description}
+\item [{3.4}]~
+\end{description}
+\textgreek{H} \textgreek{asvumptwtik\char160} \textgreek{svqetik\char160}
+\textgreek{ap\char236dosvh} \textgreek{thc} $(M_{n})_{n=1}^{\infty}$\textgreek{wc}
+\textgreek{proc} \textgreek{thn} $(S_{n})_{n=2}^{\infty}$ \textgreek{e\char208nai}
+
+\[
+\lim_{n->\infty}Eff(M_{n},S_{n}^{2})=\lim_{n->\infty}\frac{Var(M_{n})}{Var(S_{n}^{2})}=\lim_{n->\infty}\frac{\frac{\lambda}{n}(1+\frac{2n}{n-1}\lambda)}{\frac{\lambda}{n}}=
+\]
+
+\[
+\lim_{n->\infty}(1+\frac{2n}{n-1}\lambda)=1+2\lambda\lim_{n->\infty}\frac{n}{n-1}=1+2\lambda\lim_{n->\infty}\frac{1}{1-\frac{1}{n}}=1+2\lambda
+\]
+\textgreek{'Ara}, \textgreek{h} \textgreek{asvumptwtik\char160} \textgreek{svqetik\char160}
+\textgreek{ap\char236dosvh} \textgreek{thc} $(M_{n})_{n=1}^{\infty}$\textgreek{wc}
+\textgreek{proc} \textgreek{thn} $(S_{n})_{n=2}^{\infty}$ \textgreek{e\char208nai}
+$1+2\lambda$.
+\end{document}

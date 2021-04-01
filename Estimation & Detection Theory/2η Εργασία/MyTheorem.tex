@@ -1,0 +1,93 @@
+\documentclass{article}
+\usepackage{inputenc,amsmath,siunitx,scalerel,amssymb}
+
+\DeclareMathOperator{\sgn}{sgn}
+
+\title{\Large{HW02}}
+
+\author{Group 22}
+
+\begin{document}
+
+\maketitle
+
+\paragraph*{Theorem} 
+For every $x_{1} \leq x_{2} \leq ...  \leq x_{N} \in \mathbb{R} $ there exists :\\
+
+\begin{align*}
+\widehat{z} &=\lbrace z:z =x_{\scaleto{\dfrac{N+1}{2}}{10pt}}~for~N=2k+1 ~ and ~
+z\in \left( x_{\scaleto{\dfrac{N}{2}}{10pt}},x_{\scaleto{\dfrac{N}{2}}{10pt} +1} \right)~for N=2k,~k \in \mathbb{N} \rbrace\\
+&=median\lbrace x_{1},x_{2},...,x_{n}\rbrace
+\end{align*}
+such that minimizes the Mean Absolute Error $J$ of $z$ with respect to $x_{1}, x_{2} , ...  ,x_{N}$, meaning:
+\begin{align*}
+\widehat{J}=J(\widehat{z} ~;x_{1}, x_{2} , ...  ,x_{N})=min_{z \in \mathbb{R}}J(z ~;x_{1}, x_{2} , ...  ,x_{N})
+\end{align*}
+%-----------------------------------------------------------
+\\
+\vspace{1cm}
+\paragraph*{Proof}
+
+We know that the following equality is true:
+
+\[ \frac{dJ}{dz}=\frac{1}{N} \sum_{n=1}^{N}\left(\left |x_n-z\right |\right)'  = \frac{1}{N}\sum_{n=1}^{N}\sgn(z-x_n)\]
+
+
+\vspace{1cm}
+where:
+\begin{equation}
+    \sgn(z)= 
+    \begin{cases}
+      -1 &  \text{ if } x < 0 \\
+      0  &  \text{ if } x = 0 \\
+      1  &  \text{ if } x > 0
+    \end{cases}
+  \end{equation}
+
+
+
+So when z is somewhere in  $[x_{1},x_{N}]$ , the sum gives us
+ +1 for every  $x_{n} < z $
+and -1 for every  $x_{n} > z$
+
+If $N=2k+1 ~k \in \mathbb{N} $ we have: \\
+\begin{align*}
+\dfrac{dJ}{dz}=\frac{1}{N}\sum_{n=1}^{N}\sgn(z-x_n)
+\begin{cases}
+      <0 &  \text{ if } z < x_{\lfloor \scaleto{ \dfrac{N+1}{2} }{10pt} \rfloor} \\
+      >0  &  \text{ if } z > x_{\lceil \scaleto{ \dfrac{N+1}{2} }{10pt} \rceil}\\
+      =0  &  \text{ if } z \in  \left[x_{\lfloor \scaleto{ \dfrac{N+1}{2} }{10pt} \rfloor},x_{\lceil \scaleto{ \dfrac{N+1}{2} }{10pt} \rceil} \right]
+    \end{cases}
+\end{align*}\\
+$\text{and } z \in  \left[x_{\lfloor \scaleto{ \dfrac{N+1}{2} }{10pt} \rfloor},x_{\lceil \scaleto{ \dfrac{N+1}{2} }{10pt} \rceil} \right]=\left[x_{k+1},x_{k+1} \right]=\lbrace x_{k+1}\rbrace $
+\\
+\\
+So in this case the minimizing z is $\widehat{z}=x_{k+1}$
+\\
+
+If $N=2k ~k \in \mathbb{N} $ we have: \\
+\begin{align*}
+\dfrac{dJ}{dz}=\frac{1}{N}\sum_{n=1}^{N}\sgn(z-x_n)
+\begin{cases}
+      <0 &  \text{ if } z < x_{\lfloor \scaleto{ \dfrac{N+1}{2} }{10pt} \rfloor} \\
+      >0  &  \text{ if } z > x_{\lceil \scaleto{ \dfrac{N+1}{2} }{10pt} \rceil}\\
+      =0  &  \text{ if } z \in  \left(x_{\lfloor \scaleto{ \dfrac{N+1}{2} }{10pt} \rfloor},x_{\lceil \scaleto{ \dfrac{N+1}{2} }{10pt} \rceil} \right)
+    \end{cases}
+\end{align*}\\
+\\
+\\
+And in this case the minimizing z is   $\widehat{z}\in  \left(x_{\lfloor \scaleto{ \dfrac{N+1}{2} }{10pt} \rfloor},x_{\lceil \scaleto{ \dfrac{N+1}{2} }{10pt} \rceil} \right)$
+\\
+
+So for every $k \in \mathbb{N} ,~~\widehat{z}=median\lbrace x_{1},x_{2},...,x_{n}\rbrace$ 
+
+
+%-----------------------------------------------------------
+\vspace{1cm}
+
+
+
+
+\end{document}
+
+\pdflatex MyTheorem.tex
