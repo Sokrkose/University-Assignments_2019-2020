@@ -18,7 +18,7 @@ struct workFunction{
 typedef void* (*work)(void* );
 
 void* task(void* i){
-  printf("I am the thread with ID = %u\n", i);
+  printf("I am the producer thread with ID = %u\n", i);
 }
 
 work job = task;
