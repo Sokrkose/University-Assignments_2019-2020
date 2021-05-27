@@ -1,0 +1,49 @@
+* source 8837_ELECTRONICS3
+V_Vss         0 N55126 1.911Vdc
+M_M3         N54662 N54662 N54714 N54714 pfet  
++ L=1u  
++ W=1u         
+C_Cc         N54606 N54756  0.5214p  TC=0,0 
+M_M2         N54606 N55276 N54590 N54590 nfet  
++ L=1u  
++ W=4u         
+M_M5         N54590 N54550 N55126 N55126 nfet  
++ L=1u  
++ W=1u         
+M_M4         N54606 N54662 N54714 N54714 pfet  
++ L=1u  
++ W=1u         
+M_M7         N54756 N54550 N55126 N55126 nfet  
++ L=1u  
++ W=6u         
+M_M6         N54756 N54606 N54714 N54714 pfet  
++ L=1u  
++ W=12u         
+M_M1         N54662 0 N54590 N54590 nfet  
++ L=1u  
++ W=4u         
+C_CL         0 N54756  2.37p  TC=0,0 
+V_Vdd         N54714 0 1.911Vdc
+M_M8         N54550 N54550 N55126 N55126 nfet  
++ L=1u  
++ W=1u         
+V_V1         0 N55276 DC 0Vdc AC 1Vac 
+M_M14         N59287 N59287 N55126 N55126 nfet  
++ L=1u  
++ W=1u         
+M_M12         N59181 N59181 N59287 N59287 nfet  
++ L=1u  
++ W=1u         
+R_R1         N55126 N59363  16.6k TC=0,0 
+M_M10         N54550 N54550 N54714 N54714 pfet  
++ L=1u  
++ W=1u         
+M_M11         N54550 N59181 N59291 N59291 nfet  
++ L=1u  
++ W=1u         
+M_M9         N59181 N54550 N54714 N54714 pfet  
++ L=1u  
++ W=1u         
+M_M13         N59291 N59287 N59363 N59363 nfet  
++ L=1u  
++ W=1u         

@@ -1,0 +1,195 @@
+
+**** 05/26/21 18:46:52 ****** PSpice Lite (October 2012) ****** ID# 10813 ****
+
+ ** Profile: "SCHEMATIC1-test"  [ C:\Users\Sokratis Koseoglou\Desktop\8837_electronics3-PSpiceFiles\SCHEMATIC1\test.sim ] 
+
+
+ ****     CIRCUIT DESCRIPTION
+
+
+******************************************************************************
+
+
+
+
+** Creating circuit file "test.cir" 
+** WARNING: THIS AUTOMATICALLY GENERATED FILE MAY BE OVERWRITTEN BY SUBSEQUENT SIMULATIONS
+
+*Libraries: 
+* Profile Libraries :
+* Local Libraries :
+.LIB "../../../8837_electronics3-pspicefiles/8837_electronics3.lib" 
+* From [PSPICE NETLIST] section of C:\SPB_Data\cdssetup\OrCAD_PSpice/16.6.0/PSpice.ini file:
+.lib "nomd.lib" 
+
+*Analysis directives: 
+.AC DEC 500 1 100mega
+.OPTIONS ADVCONV
+.PROBE64 V(alias(*)) I(alias(*)) W(alias(*)) D(alias(*)) NOISE(alias(*)) 
+.INC "..\SCHEMATIC1.net" 
+
+
+
+**** INCLUDING SCHEMATIC1.net ****
+* source 8837_ELECTRONICS3
+V_Vss         0 N55126 1.911Vdc
+M_M3         N54662 N54662 N54714 N54714 pfet  
++ L=1u  
++ W=1u         
+C_Cc         N54606 N54756  0.5214p  TC=0,0 
+M_M2         N54606 N55276 N54590 N54590 nfet  
++ L=1u  
++ W=4u         
+M_M5         N54590 N54550 N55126 N55126 nfet  
++ L=1u  
++ W=1u         
+M_M4         N54606 N54662 N54714 N54714 pfet  
++ L=1u  
++ W=1u         
+M_M7         N54756 N54550 N55126 N55126 nfet  
++ L=1u  
++ W=6u         
+M_M6         N54756 N54606 N54714 N54714 pfet  
++ L=1u  
++ W=12u         
+M_M1         N54662 0 N54590 N54590 nfet  
++ L=1u  
++ W=4u         
+C_CL         0 N54756  2.37p  TC=0,0 
+V_Vdd         N54714 0 1.911Vdc
+M_M8         N54550 N54550 N55126 N55126 nfet  
++ L=1u  
++ W=1u         
+V_V1         0 N55276 DC 0Vdc AC 1Vac 
+M_M14         N59287 N59287 N55126 N55126 nfet  
++ L=1u  
++ W=1u         
+M_M12         N59181 N59181 N59287 N59287 nfet  
++ L=1u  
++ W=1u         
+R_R1         N55126 N59363  16.6k TC=0,0 
+M_M10         N54550 N54550 N54714 N54714 pfet  
++ L=1u  
++ W=1u         
+M_M11         N54550 N59181 N59291 N59291 nfet  
++ L=1u  
++ W=1u         
+M_M9         N59181 N54550 N54714 N54714 pfet  
++ L=1u  
++ W=1u         
+M_M13         N59291 N59287 N59363 N59363 nfet  
++ L=1u  
++ W=1u         
+
+**** RESUMING test.cir ****
+.END
+
+**** 05/26/21 18:46:52 ****** PSpice Lite (October 2012) ****** ID# 10813 ****
+
+ ** Profile: "SCHEMATIC1-test"  [ C:\Users\Sokratis Koseoglou\Desktop\8837_electronics3-PSpiceFiles\SCHEMATIC1\test.sim ] 
+
+
+ ****     MOSFET MODEL PARAMETERS
+
+
+******************************************************************************
+
+
+
+
+               pfet            nfet            
+               PMOS            NMOS            
+       LEVEL    3               3            
+         TPG   -1                            
+           L  100.000000E-06  100.000000E-06 
+           W  100.000000E-06  100.000000E-06 
+          LD   22.000000E-09  164.700000E-09 
+         VTO    -.9056           .786        
+          KP   29.352000E-06   96.379000E-06 
+       GAMMA     .4863           .5863       
+         PHI     .6              .6          
+      LAMBDA    0               0            
+         RSH  104.7            85.45         
+          IS   10.000000E-15   10.000000E-15 
+          JS    0               0            
+          PB     .85             .8          
+        PBSW     .85             .8          
+          CJ  484.470000E-06  385.410000E-06 
+        CJSW  164.570000E-12  139.400000E-12 
+          MJ     .5027          1.1854       
+        MJSW     .217168         .125195     
+        CGSO   53.752000E-12  402.410000E-12 
+        CGDO   53.752000E-12  402.410000E-12 
+        CGBO  336.500000E-12  361.440000E-12 
+        NSUB   18.900000E+15   16.160000E+15 
+         NFS    3.460000E+12    5.000000E+12 
+         TOX   21.200000E-09   21.200000E-09 
+          XJ  200.000000E-09  200.000000E-09 
+          UO  180.2           591.7          
+       UCRIT   10.000000E+03   10.000000E+03 
+        VMAX  373.200000E+03  208.200000E+03 
+       DELTA    1.52             .6967       
+       THETA     .1248           .08122      
+         ETA     .1641           .07066      
+       KAPPA    9.694            .1396       
+      DIOMOD    1               1            
+         VFB    0               0            
+        LETA    0               0            
+        WETA    0               0            
+          U0    0               0            
+        TEMP    0               0            
+         VDD    5               5            
+       XPART    0               0            
+
+
+**** 05/26/21 18:46:52 ****** PSpice Lite (October 2012) ****** ID# 10813 ****
+
+ ** Profile: "SCHEMATIC1-test"  [ C:\Users\Sokratis Koseoglou\Desktop\8837_electronics3-PSpiceFiles\SCHEMATIC1\test.sim ] 
+
+
+ ****     SMALL SIGNAL BIAS SOLUTION       TEMPERATURE =   27.000 DEG C
+
+
+******************************************************************************
+
+
+
+ NODE   VOLTAGE     NODE   VOLTAGE     NODE   VOLTAGE     NODE   VOLTAGE
+
+
+(N54550)    -.6774 (N54590)    -.7956 (N54606)     .1739 (N54662)     .1739     
+
+(N54714)    1.9110 (N54756)    -.2438 (N55126)   -1.9110 (N55276)    0.0000     
+
+(N59181)     .7879 (N59287)    -.5615 (N59291)    -.8034 (N59363)   -1.6991 
+
+
+
+
+    VOLTAGE SOURCE CURRENTS
+    NAME         CURRENT
+
+    V_Vss       -2.399E-04
+    V_Vdd       -2.399E-04
+    V_V1         0.000E+00
+
+    TOTAL POWER DISSIPATION   9.17E-04  WATTS
+
+
+
+          JOB CONCLUDED
+
+**** 05/26/21 18:46:52 ****** PSpice Lite (October 2012) ****** ID# 10813 ****
+
+ ** Profile: "SCHEMATIC1-test"  [ C:\Users\Sokratis Koseoglou\Desktop\8837_electronics3-PSpiceFiles\SCHEMATIC1\test.sim ] 
+
+
+ ****     JOB STATISTICS SUMMARY
+
+
+******************************************************************************
+
+
+
+  Total job time (using Solver 1)   =         .31
+
