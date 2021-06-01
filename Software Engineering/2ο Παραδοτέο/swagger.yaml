@@ -1,0 +1,1586 @@
+# CHANGELOG:
+#
+# 31/05/2021:
+#   - Removed author-related tags.
+#
+# 30/05/2021:
+#   - Removed circular definitions.
+#   - Switched 'Login' entity for 'Token'.
+#
+# 29/05/2021:
+#   - Switched to https and changed default request port.
+#   - Removed 'findMessagesByChat'
+#
+# 28/05/2021:
+#   - Remove /distanceToAccount endpoint.
+#   - Remove location parameter from /post
+#
+# 23/05/2021:
+#   - Added Login Model.
+#   - Update Operation ID's from Node-RED.
+#   - Add findReviewsByAccount
+#
+# 22/05/2021:
+#   - Fix URL's.
+#   - Fix OperationID's
+#
+# 20/05/2021:
+#   - Fix operationId's.
+#   - Fix descriptions.
+#   - Fix URL parameters.
+#   - Fix Plural.
+# 
+# 18/05/2021: 
+#   - Add Petridis' first endpoints.
+#   - Fix quotes.
+#   - Add logout (?).
+#   - Add kostas' first endpoints.
+#   - Add Responses.
+#
+
+swagger: "2.0"
+info:
+  description: "This is the WalkMe API Documentation Page. You can find out more about WalkMe at [https://walkme.eu.org](https://walkme.eu.org)."
+  version: "1.0.0"
+  title: "WalkMe"
+  termsOfService: "https://walkme.eu.org/terms"
+  contact:
+    email: "webmaster@walkme.eu.org"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "api.walkme.eu.org"
+basePath: "/"
+
+
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
+
+tags:
+- name: "account"
+- name: "post"
+- name: "review"
+- name: "tag"
+- name: "message"
+- name: "chat"
+- name: "notification"
+
+
+  
+schemes:
+- "https"
+
+
+paths:
+
+
+  
+  /account:
+    post:
+      tags:
+      - "account"
+      summary: "Sign Up as a new user account"
+      operationId: "postAccount"
+      description: "Creates a new user account"
+      produces:
+      - application/json
+      - application/xml
+      consumes:
+      - application/json
+      - application/xml
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "The Account to be created"
+        required: true
+        schema:
+          $ref: "#/definitions/Account"
+      responses:
+        200: 
+          description: "OK"
+        400:
+          description: "Bad Request"
+        403:
+          description: "Forbidden"
+        405:
+          description: "Invalid Input" 
+        500:
+          description: "Internal Server Error"
+          
+     
+  /account/login:
+    put:
+      tags:
+      - "account"
+      summary: "Logs user into the system"
+      description: "Logs user into the system"
+      operationId: "loginAccount"
+      produces:
+      - application/json
+      - application/xml
+      consumes:
+      - application/json
+      - application/xml
+      parameters:
+      - name: "username"
+        in: "query"
+        description: "The user name for login"
+        required: true
+        type: "string"
+      - name: "password"
+        in: "query"
+        description: "The password for login in clear text"
+        required: true
+        type: "string"
+      responses:
+        200: 
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Token"
+        400:
+          description: "Bad Request"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found" 
+        405:
+          description: "Invalid Input" 
+        500:
+          description: "Internal Server Error"
+  
+  
+  /account/{accountID}/findPostsByAccount/{refAccountID}:        
+    get:
+      tags:
+      - "post"
+      summary: "Retrieve account's Posts"
+      operationId: "findPostsByAccount"
+      description: "Retrieve account's Posts"
+      produces:
+      - application/json
+      - application/xml
+      consumes:
+      - application/json
+      - application/xml
+      parameters:
+      - in: "path"
+        name: "accountID"
+        description: "The User's Account ID"
+        required: true
+        type: "integer"
+      - in: "path"
+        name: "refAccountID"
+        description: "The Account ID of the User's posts to be loaded"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/AllPosts"
+        400:
+          description: "Bad Request"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found" 
+        405:
+          description: "Invalid Input" 
+        500:
+          description: "Internal Server Error"
+      security:
+      - JWTbearerAuth: []
+     
+     
+  /account/{accountID}/post:
+    post:
+      tags:
+      - "post"
+      summary: "Add Post to account"
+      operationId: "postPost"
+      description: "Add Post to account"
+      produces:
+      - application/json
+      - application/xml
+      consumes:
+      - application/json
+      - application/xml
+      parameters:
+      - in: "path"
+        name: "accountID"
+        description: "Account to be updated"
+        required: true
+        type: "integer"
+      - in: "body"
+        name: "body"
+        description: "Post model"
+        required: true
+        schema:
+          $ref: "#/definitions/Post"
+      responses:
+        200: 
+          description: "OK"
+        400:
+          description: "Bad Request"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        405:
+          description: "Invalid Input" 
+        500:
+          description: "Internal Server Error"
+      security:
+      - JWTbearerAuth: []
+              
+      
+      
+  /account/{accountID}/logout:
+    get:
+      tags:
+        - "account"
+      summary: "Logs out current logged in user session"
+      description: ""
+      operationId: "logoutAccount"
+      parameters:
+      - in: "path"
+        name: "accountID"
+        description: "Account of logged in User"
+        required: true
+        type: "integer"
+      produces:
+      - application/json
+      - application/xml
+      consumes:
+      - application/json
+      - application/xml
+      responses:
+        200:
+          description: "OK"
+        400:
+          description: "Bad Request"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        500:
+          description: "Internal Server Error"  
+      security:
+      - JWTbearerAuth: []
+      
+      
+  /account/{accountID}/findChatByAccount/{refAccountID}:
+    get:
+      tags:
+      - "chat"
+      summary: "Find the chat between two users"
+      description: "Find the chat between two users"
+      operationId: "findChatByAccount"
+      produces:
+      - application/json
+      - application/xml
+      consumes:
+      - application/json
+      - application/xml
+      parameters:
+      - in: "path"
+        name: "accountID"
+        description: "The Account ID of the user searching"
+        required: true
+        type: "integer"
+      - in: "path"
+        name: "refAccountID"
+        description: "The Account ID of the chat's other user"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Chat"
+        400:
+          description: "Bad Request"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found" 
+        405:
+          description: "Invalid Input" 
+        500:
+          description: "Internal Server Error"
+      security:
+      - JWTbearerAuth: []
+      
+    
+  
+  /account/{accountID}:
+    get:
+      tags:
+        - "account"
+      summary: "Find Account by ID"
+      description: "Returns a single Account"
+      operationId: "getAccount"
+      produces:
+      - application/json
+      - application/xml
+      consumes:
+      - application/json
+      - application/xml
+      parameters:
+      - name: "accountID"
+        in: "path"
+        description: "ID of account to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Account"
+        400:
+          description: "Bad Request"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found" 
+        405:
+          description: "Invalid Input" 
+        500:
+          description: "Internal Server Error"
+      security:
+      - JWTbearerAuth: []    
+          
+          
+    put:
+      tags:
+        - "account"
+      summary: "Update an existing Account"
+      description: "Update an existing Account"
+      operationId: "putAccount"
+      produces:
+      - application/json
+      - application/xml
+      consumes:
+      - application/json
+      - application/xml
+      parameters:
+      - name: "accountID"
+        in: "path"
+        description: "ID of account to update"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: "body"
+        name: "body"
+        description: "Account object to update"
+        required: true
+        schema:
+          $ref: "#/definitions/Account"
+      responses:
+        200: 
+          description: "Accepted"
+        400:
+          description: "Bad Request"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found" 
+        405:
+          description: "Invalid Input" 
+        500:
+          description: "Internal Server Error"
+      security:
+      - JWTbearerAuth: []
+      
+      
+  /account/{accountID}/review:
+    get:
+      tags:
+      - "review"
+      summary: "Retrieve all Reviews"
+      # Give an operationId to be used by the code-generators (client/server)
+      operationId: "getReviews"
+      description: "Retrieve all Reviews"
+      produces:
+      - application/json
+      - application/xml
+      consumes:
+      - application/json
+      - application/xml
+      parameters:
+      - name: "accountID"
+        in: "path"
+        description: "ID of account to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: '#/definitions/AllReviews'
+        400:
+          description: "Bad Request"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found" 
+        405:
+          description: "Invalid Input" 
+        500:
+          description: "Internal Server Error"
+      security:
+      - JWTbearerAuth: []
+      
+      
+      
+      
+    post:
+      tags:
+        - "review"
+      summary: "Add a new Review"
+      description: "Add a new Review"
+      operationId: "postReview"
+      produces:
+      - application/json
+      - application/xml
+      consumes:
+      - application/json
+      - application/xml
+      parameters:
+      - name: "accountID"
+        in: "path"
+        description: "ID of Account that adds a Review"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: "body"
+        name: "body"
+        description: "Review to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/Review"
+      responses:
+        200: 
+          description: "OK"
+        400:
+          description: "Bad Request"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        405:
+          description: "Invalid Input" 
+        500:
+          description: "Internal Server Error"
+      security:
+      - JWTbearerAuth: []
+      
+      
+      
+  /account/{accountID}/findReviewsByAccount/{refAccountID}:
+    get:
+      tags:
+      - "review"
+      summary: "Retrieve all Reviews of an Account"
+      operationId: "findReviewsByAccount"
+      description: "Retrieve all Reviews of an Account"
+      produces:
+      - application/json
+      - application/xml
+      consumes:
+      - application/json
+      - application/xml
+      parameters:
+      - name: "accountID"
+        in: "path"
+        description: "Account ID of logged in user"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "refAccountID"
+        in: "path"
+        description: "Account ID of user's reviews to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: '#/definitions/AllReviews'
+        400:
+          description: "Bad Request"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found" 
+        405:
+          description: "Invalid Input" 
+        500:
+          description: "Internal Server Error"
+      security:
+      - JWTbearerAuth: []    
+      
+      
+      
+  /account/{accountID}/review/{reviewID}:   
+    put:
+      tags:
+        - "review"    
+      summary: "Update an existing Review"
+      description: "Update an existing Review"
+      operationId: "putReview"
+      produces:
+      - application/json
+      - application/xml
+      consumes:
+      - application/json
+      - application/xml
+      parameters:
+      - name: "accountID"
+        in: "path"
+        description: "Account ID of logged in User"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "reviewID"
+        in: "path"
+        description: "ID of review to update"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: "body"
+        name: "body"
+        description: "Review object to be updated"
+        required: true
+        schema:
+          $ref: "#/definitions/Review"
+      responses:
+        200: 
+          description: "Accepted"
+        400:
+          description: "Bad Request"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found" 
+        405:
+          description: "Invalid Input" 
+        500:
+          description: "Internal Server Error"
+      security:
+      - JWTbearerAuth: []
+      
+      
+    delete:
+      tags:
+        - "review"  
+      summary: "Deletes a review"
+      description: "Deletes a review"
+      operationId: "deleteReview"
+      produces:
+      - application/json
+      - application/xml
+      consumes:
+      - application/json
+      - application/xml
+      parameters:
+      - name: "accountID"
+        in: "path"
+        description: "Account ID of logged in User"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "reviewID"
+        in: "path"
+        description: "ID of Review to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "OK"
+        400:
+          description: "Bad Request"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found" 
+        405:
+          description: "Invalid Input" 
+        500:
+          description: "Internal Server Error"
+      security:
+      - JWTbearerAuth: []
+      
+      
+  /account/{accountID}/tag:
+    post:
+      tags:
+        - "tag"    
+      summary: "Add a new Tag"
+      description: "Add a new Tag"
+      operationId: "postTag"
+      produces:
+      - application/json
+      - application/xml
+      consumes:
+      - application/json
+      - application/xml
+      parameters:
+      - name: "accountID"
+        in: "path"
+        description: "Account ID of logged in User"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: "body"
+        name: "body"
+        description: "Tag that needs to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/Tag"
+      responses:
+        200: 
+          description: "Created"
+        400:
+          description: "Bad Request"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        405:
+          description: "Invalid Input" 
+        500:
+          description: "Internal Server Error"
+      security:
+      - JWTbearerAuth: []
+      
+    
+  /account/{accountID}/tag/{tagID}:
+    put:
+      tags:
+        - "tag"    
+      summary: "Update an existing Tag"
+      description: "Update an existing Tag"
+      operationId: "putTag"
+      produces:
+      - application/json
+      - application/xml
+      consumes:
+      - application/json
+      - application/xml
+      parameters:
+      - name: "accountID"
+        in: "path"
+        description: "ID of account"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "tagID"
+        in: "path"
+        description: "ID of tag to edit"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: "body"
+        name: "body"
+        description: "Tag object that needs to be updated"
+        required: true
+        schema:
+          $ref: "#/definitions/Tag"
+      responses:
+        200: 
+          description: "Accepted"
+        400:
+          description: "Bad Request"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found" 
+        405:
+          description: "Invalid Input" 
+        500:
+          description: "Internal Server Error"
+      security:
+      - JWTbearerAuth: []
+      
+      
+    delete:
+      tags:
+        - "tag"  
+      summary: "Deletes a tag"
+      description: "Deletes a tag"
+      operationId: "deleteTag"
+      produces:
+      - application/json
+      - application/xml
+      consumes:
+      - application/json
+      - application/xml
+      parameters:
+      - name: "accountID"
+        in: "path"
+        description: "ID of account"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "tagID"
+        in: "path"
+        description: "ID of Tag to Delete"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "OK"
+        400:
+          description: "Bad Request"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found" 
+        405:
+          description: "Invalid Input" 
+        500:
+          description: "Internal Server Error"
+      security:
+      - JWTbearerAuth: []
+      
+      
+  
+  
+  /post:  
+    get:
+      tags:
+      - "post"
+      summary: "Retrieve Posts"
+      operationId: "getPosts"
+      description: "Retrieve Posts"
+      produces:
+      - application/json
+      - application/xml
+      consumes:
+      - application/json
+      - application/xml
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/AllPosts"
+        400:
+          description: "Bad Request"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        405:
+          description: "Invalid Input" 
+        500:
+          description: "Internal Server Error"
+      security:
+      - JWTbearerAuth: []
+      
+  
+  /account/{accountID}/findPostsByTag/{tagID}:
+    get:
+      tags:
+      - "post"
+      summary: "Finds Posts by a tag"
+      description: "Finds Posts by a tag"
+      operationId: "findPostsByTag"
+      produces:
+      - application/json
+      - application/xml
+      consumes:
+      - application/json
+      - application/xml
+      parameters:
+      - in: "path"
+        name: "accountID"
+        description: "User's Account ID"
+        required: true
+        type: "integer"
+      - in: "path"
+        name: "tagID"
+        description: "ID of Tag to search by"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: '#/definitions/AllPosts'
+        400:
+          description: "Bad Request"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found" 
+        405:
+          description: "Invalid Input" 
+        500:
+          description: "Internal Server Error"
+      security:
+      - JWTbearerAuth: []
+      
+  
+  
+  /account/{accountID}/post/{postID}:
+    get:
+      tags:
+      - "post"
+      summary: "Retrieve a Post"
+      operationId: "getPost"
+      description: "Retrieve a Post"
+      produces:
+      - application/json
+      - application/xml
+      consumes:
+      - application/json
+      - application/xml
+      parameters:
+      - in: "path"
+        name: "accountID"
+        description: "User's Account ID"
+        required: true
+        type: "integer"
+      - in: "path"
+        name: "postID"
+        description: "ID of Post to retrieve"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: '#/definitions/Post'
+        400:
+          description: "Bad Request"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found" 
+        405:
+          description: "Invalid Input" 
+        500:
+          description: "Internal Server Error"
+      security:
+      - JWTbearerAuth: []
+  
+              
+              
+  /account/{accountID}/notification:
+    post:
+      tags:
+      - "notification"
+      summary: "Add a New Notification"
+      description: "Adds notification to the system"
+      operationId: "postNotification"
+      produces:
+      - application/json
+      - application/xml
+      consumes:
+      - application/json
+      - application/xml
+      parameters:
+      - in: "path"
+        name: "accountID"
+        description: "Account ID of logged in user"
+        required: true
+        type: "integer"
+      - in: "body"
+        name: "body"
+        description: "Notification to Add"
+        required: true
+        schema:
+          $ref: "#/definitions/Notification"
+      responses:
+        200: 
+          description: "ΟΚ"
+        400:
+          description: "Bad Request"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        405:
+          description: "Invalid Input" 
+        500:
+          description: "Internal Server Error"
+      security:
+      - JWTbearerAuth: []
+      
+    get:
+      tags:
+      - "notification"
+      summary: "Retrieve Personal Notifications"
+      description: "Retrieve Notifications Directed to the Requesting User"
+      operationId: "getNotifications"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "accountID"
+        description: "User's Account ID"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: '#/definitions/AllNotifications'
+        400:
+          description: "Bad Request"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        405:
+          description: "Invalid Input" 
+        500:
+          description: "Internal Server Error"
+      security:
+      - JWTbearerAuth: []
+    
+
+  /accounts/{accountID}/notification/{notificationID}:
+    get:
+      tags:
+      - "notification"
+      summary: "Get a Notification"
+      description: "Get a Notification"
+      operationId: "getNotification"
+      produces:
+      - application/json
+      - application/xml
+      consumes:
+      - application/json
+      - application/xml
+      parameters:
+      - in: "path"
+        name: "accountID"
+        description: "Account ID of logged in user"
+        required: true
+        type: "integer"
+      - in: "path"
+        name: "notificationID"
+        description: "ID of Notification to return"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: '#/definitions/Notification'
+        400:
+          description: "Bad Request"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found" 
+        405:
+          description: "Invalid Input" 
+        500:
+          description: "Internal Server Error"
+      security:
+      - JWTbearerAuth: []
+      
+    put:
+      tags:
+      - "notification"
+      summary: "Update a Notification"
+      description: "Update a Notification"
+      operationId: "putNotification"
+      produces:
+      - application/json
+      - application/xml
+      consumes:
+      - application/json
+      - application/xml
+      parameters:
+      - in: "path"
+        name: "accountID"
+        description: "Account ID of logged in user"
+        required: true
+        type: "integer"
+      - in: "path"
+        name: "notificationID"
+        description: "Notification to update"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "OK"
+        400:
+          description: "Bad Request"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found" 
+        405:
+          description: "Invalid Input" 
+        500:
+          description: "Internal Server Error"
+      security:
+      - JWTbearerAuth: []
+  
+  
+    
+    
+  /account/{accountID}/chat/:
+    post:
+      tags:
+      - "chat"
+      summary: "Post a chat"
+      operationId: "postChat"
+      description: "Post a chat"
+      produces:
+      - application/json
+      - application/xml
+      consumes:
+      - application/json
+      - application/xml
+      parameters:
+      - in: "path"
+        name: "accountID"
+        description: "The Account ID"
+        required: true
+        type: "integer"
+      - in: "body"
+        name: "body"
+        description: "The Chat to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/Chat"
+      responses:
+        200: 
+          description: "OK"
+        400:
+          description: "Bad Request"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        405:
+          description: "Invalid Input" 
+        500:
+          description: "Internal Server Error"
+      security:
+      - JWTbearerAuth: []    
+      
+  
+  /account/{accountID}/chat:
+    get:
+      tags:
+      - "chat"
+      summary: "Get all chats (contacts)"
+      operationId: "getChats"
+      description: "Get all chats (contacts)"
+      produces:
+      - application/json
+      - application/xml
+      consumes:
+      - application/json
+      - application/xml
+      parameters:
+      - in: "path"
+        name: "accountID"
+        description: "The Account ID"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/AllChats"
+        400:
+          description: "Bad Request"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found" 
+        405:
+          description: "Invalid Input" 
+        500:
+          description: "Internal Server Error"
+      security:
+      - JWTbearerAuth: []  
+      
+      
+  /account/{accountID}/chat/{chatID}:
+    get:
+      tags:
+      - "chat"
+      summary: "Get a past chat based on its ID"
+      operationId: "getChat"
+      description: "Get a past chat based on its ID"
+      produces:
+      - application/json
+      - application/xml
+      consumes:
+      - application/json
+      - application/xml
+      parameters:
+      - in: "path"
+        name: "accountID"
+        description: "The Account ID"
+        required: true
+        type: "integer"
+      - in: "path"
+        name: "chatID"
+        description: "The Chat ID"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Chat"
+        400:
+          description: "Bad Request"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found" 
+        405:
+          description: "Invalid Input" 
+        500:
+          description: "Internal Server Error"
+      security:
+      - JWTbearerAuth: []  
+      
+      
+      
+      
+  /account/{accountID}/chat/{chatID}/message:
+    get:
+      tags:
+      - "message"
+      summary: "Get a chat's messages"
+      operationId: "getMessages"
+      description: "Get a chat's messages"
+      produces:
+      - application/json
+      - application/xml
+      consumes:
+      - application/json
+      - application/xml
+      parameters:
+      - in: "path"
+        name: "accountID"
+        description: "The Account ID"
+        required: true
+        type: "integer"
+      - in: "path"
+        name: "chatID"
+        description: "The Chat ID"
+        required: true
+        type: "integer"
+      responses:
+        200: 
+          description: "OK"
+          schema:
+            $ref: "#/definitions/AllMessages"
+        400:
+          description: "Bad Request"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        405:
+          description: "Invalid Input" 
+        500:
+          description: "Internal Server Error"
+      security:
+      - JWTbearerAuth: []    
+    post:
+      tags:
+      - "message"
+      summary: "Post a message to a chat"
+      operationId: "postMessage"
+      description: "Post a message to a chat"
+      produces:
+      - application/json
+      - application/xml
+      consumes:
+      - application/json
+      - application/xml
+      parameters:
+      - in: "path"
+        name: "accountID"
+        description: "The Account ID"
+        required: true
+        type: "integer"
+      - in: "path"
+        name: "chatID"
+        description: "The Chat ID"
+        required: true
+        type: "integer"
+      - in: "body"
+        name: "body"
+        description: "The Message to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/Message"
+      responses:
+        200: 
+          description: "OK"
+        400:
+          description: "Bad Request"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        405:
+          description: "Invalid Input" 
+        500:
+          description: "Internal Server Error"
+      security:
+      - JWTbearerAuth: []    
+      
+          
+  /account/{accountID}/chat/{chatID}/message/{messageID}:
+    get:
+      tags:
+      - "message"
+      summary: "Get a message by ID"
+      operationId: "getMessage"
+      description: "Get a message by ID"
+      produces:
+      - application/json
+      - application/xml
+      consumes:
+      - application/json
+      - application/xml
+      parameters:
+      - in: "path"
+        name: "accountID"
+        description: "The Account ID"
+        required: true
+        type: "integer"
+      - in: "path"
+        name: "messageID"
+        description: "The Message ID to return"
+        required: true
+        type: "integer"
+      - in: "path"
+        name: "chatID"
+        description: "The Message ID to return"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Message"
+        400:
+          description: "Bad Request"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found" 
+        405:
+          description: "Invalid Input" 
+        500:
+          description: "Internal Server Error"
+      security:
+      - JWTbearerAuth: []  
+      
+  
+  
+  
+          
+securityDefinitions:
+  api_key:
+    type: "apiKey"
+    name: "api_key"
+    in: "header"
+  JWTbearerAuth:
+    type: "apiKey"
+    name: "Authorization"
+    in: "header"
+    
+    
+    
+definitions:
+
+  Post:
+    type: "object"
+    properties:
+      postID:
+        type: "integer"
+      title:
+        type: "string"
+      description:
+        type: "string"
+      photo:
+        type: "string"
+        format: "byte"
+        description: "Picture encoded in Base64."
+      duration:
+        type: "integer"
+        minimum: 0
+      dogSize:
+        $ref: "#/definitions/DogSize"
+      tagOptions:
+        type: "array"
+        minItems: 0
+        maxItems: 6
+        uniqueItems: true
+        items: 
+          $ref: "#/definitions/TagOption"
+      publisher:
+        $ref: "#/definitions/Account"
+    xml:
+      name: "Post" 
+      
+  AllPosts:
+    type: "array"
+    items: 
+      $ref: "#/definitions/Post"
+      
+        
+        
+  TagOption:
+    type: "string"
+    enum:
+      - "tripToPark"
+      - "specialHealthCondition"
+      - "stayAtHome"
+      - "tripWithOwner"
+      - "nonSocializedPet"
+      - "petForChildren"
+    xml:
+      name: "TagOption"
+      
+  DogSize:
+    type: "string"
+    enum:
+    - "extraSmall"
+    - "small"
+    - "medium"
+    - "large"
+    xml:
+      name: "DogSize"      
+    
+      
+  Tag:
+    type: "object"
+    properties:
+      tagID:
+        type: "integer"
+      distance:
+        type: "integer"
+      duration:
+        type: "integer"
+      rating:
+        type: "integer"
+      dogSizes:
+        type: "array"
+        minItems: 0
+        maxItems: 4
+        uniqueItems: true
+        items: 
+          $ref: "#/definitions/DogSize"
+      tagOptions:
+        type: "array"
+        minItems: 0
+        maxItems: 6
+        uniqueItems: true
+        items: 
+          $ref: "#/definitions/TagOption"
+      account:
+        $ref: "#/definitions/Account"
+    xml:
+      name: "Tag"        
+        
+  Account:
+    type: "object"
+    properties:
+      accountID:
+        type: "integer"
+      email:
+        type: "string"
+        format: "email"
+      name:
+        type: "string"
+      phone:
+        type: "string"
+      street:
+        type: "string"
+      city:
+        type: "string"
+      postalCode:
+        type: "string"
+      country:
+        type: "string"
+      password:
+        type: "string"
+        format: "password"
+      rating:
+        type: "number"
+        format: "float"
+      username:
+        type: "string"
+      photo:
+        type: "string"
+        format: "byte"
+        description: "Picture encoded in Base64."
+    xml:
+      name: "Account"        
+
+  Review:
+    type: "object"
+    properties:
+      reviewID:
+        type: "integer"
+      rating:
+        type: "integer"
+      description:
+        type: "string"
+      reviewer:
+        $ref: "#/definitions/Account"
+      reviewee:
+        $ref: "#/definitions/Account"
+    xml:
+      name: "Review"        
+ 
+  AllReviews:
+    type: "array"
+    items: 
+      $ref: "#/definitions/Review"        
+        
+  Message:
+    type: "object"
+    properties:
+      messageID:
+        type: "integer"
+      text:
+        type: "string"
+      timestamp:
+        type: "string"
+        format: "date-time"
+      read:
+        type: "boolean"
+      sender:
+        $ref: "#/definitions/Account"
+      receiver:
+        $ref: "#/definitions/Account"
+      chat:
+        $ref: "#/definitions/Chat"
+    xml:
+      name: "Message"        
+
+
+  AllMessages:
+    type: "array"
+    items: 
+      $ref: "#/definitions/Message"        
+      
+      
+  Chat:
+    type: "object"
+    properties:
+      chatID:
+        type: "integer"
+      unreadMessages:
+        type: "array"
+        minItems: 2
+        maxItems: 2
+        items:
+          type: "integer"
+      lastMessage:
+        type: "array"
+        description: "Last Message for each one of the two accounts."
+        minItems: 2
+        maxItems: 2
+        items:
+          type: "string"
+      accounts:
+        type: "array"
+        minItems: 2
+        maxItems: 2
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Account"
+    xml:
+      name: "Chat"
+
+
+  AllChats:
+    type: "array"
+    items: 
+      $ref: "#/definitions/Chat"
+      
+  
+  Notification:
+    type: "object"
+    properties:
+      notificationID:
+        type: "integer"
+      notificationMessage:
+        type: "string"
+      account:
+        description: "Account which this notification is directed at."
+        $ref: "#/definitions/Account"
+        
+        
+  AllNotifications:
+    type: "array"
+    items:
+      $ref: "#/definitions/Notification"
+ 
+
+ 
+  Token:
+    type: "object"
+    properties:
+      token:
+        type: "string"
+        description: "JWT token"
+     
+     
+     
+        
